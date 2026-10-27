@@ -1,5 +1,11 @@
 # Project Template
 
+> [!NOTE]
+> This is the real, open-source code of project-template. Its home is Forgejo, at
+> https://git.techcraftsmen.net/artur-rios/project-template; the copy on GitHub is a read-only mirror, for viewing only, and
+> its issues and pull requests are not followed. If you want to contribute, email me at
+> arturdev@duck.com.
+
 A generic template to be used as a starter for any project.
 
 ## Folder Structure
