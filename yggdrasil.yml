@@ -1,0 +1,20 @@
+# What Jenkins checks for this repository, read by the pipeline of the yggdrasil installation that runs it
+# (yggdrasil's docs/catalog.md, "Repository pipeline file", has every field). It is data, never code: images
+# (pinned by version and digest, which Renovate keeps up to date), commands, globs and the names of Jenkins
+# credentials. The commands are the scripts under ci/, which run from the repository's root, so you can run them on
+# your machine too. Nothing is deployed or released from here: the checks report on every pull request and push.
+# Check it where the catalog is, in the yggdrasil checkout:
+#   python3 scripts/pipeline_config.py describe project-template <this repository's checkout>
+#
+# The template has no code yet (src/ and tests/ hold only .gitkeep), so both checks look for .NET solutions or
+# projects under src/ and tests/ and pass with a notice while there are none; they check whatever a project made from
+# the template, or the template itself, adds there.
+
+checks:
+  lint:                                  # dotnet format --verify-no-changes over each solution (or project): whitespace and code style
+    image: mcr.microsoft.com/dotnet/sdk:10.0.404@sha256:fe0fd4e93bd2fbb47c883b7a6369e5c8d3db8bf01cdc5981f6ee35fbdf3ff4fb
+    run: ci/lint.sh
+
+  build:                                 # restore, build (Release) and test each solution (or project)
+    image: mcr.microsoft.com/dotnet/sdk:10.0.404@sha256:fe0fd4e93bd2fbb47c883b7a6369e5c8d3db8bf01cdc5981f6ee35fbdf3ff4fb
+    run: ci/build.sh
